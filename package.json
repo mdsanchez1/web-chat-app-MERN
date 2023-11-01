@@ -9,9 +9,11 @@
   "author": "Michael Sanchez",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "framer-motion": "^10.16.4",
+    "mongodb": "^6.2.0",
     "mongoose": "^8.0.0",
     "nodemon": "^3.0.1"
   }
