@@ -21,7 +21,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     username,
     password,
-    pic,
+    picture,
   });
 
   if (user) {
@@ -30,7 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       username: user.username,
-      pic: user.pic,
+      pic: user.picture,
       token: generateToken(user._id),
     });
   } else {
@@ -57,9 +57,26 @@ const loginUser = asyncHandler(async (req, res) => {
     id: user._id,
     name: user.name,
     username: user.username,
-    pic: user.pic,
+    pic: user.picture,
     token: generateToken(user.id),
   });
 });
 
-module.exports = { registerUser, loginUser };
+// GET /api/user/
+// get the list of all users, unless a specific query is specified
+const getUsers = asyncHandler(async (req, res) => {
+  const user = req.query.search
+    ? {
+        $or: [
+          { name: { $regex: req.query.search, $options: "i" } },
+          { username: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const users = await User.find(user); //.find({ _id: { $ne: req.user._id } });
+
+  res.send(users);
+});
+
+module.exports = { registerUser, loginUser, getUsers };

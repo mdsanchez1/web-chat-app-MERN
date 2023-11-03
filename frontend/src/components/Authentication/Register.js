@@ -143,7 +143,7 @@ const Register = () => {
       setLoading(false);
 
       // push user to chatpage
-      history.pushState("/chats");
+      history.push("/chats");
     } catch (err) {
       toast({
         title: "Error!",
@@ -272,7 +272,7 @@ const Register = () => {
             "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
         }}
         marginTop={4}
-        width="50%"
+        width="100%"
         onClick={registerHandler}
         isLoading={loading}
       >
