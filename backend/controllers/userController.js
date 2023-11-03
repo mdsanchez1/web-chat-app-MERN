@@ -48,7 +48,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ username });
 
-  if (!user || !(await User.matchPassword(password))) {
+  if (!user || !(await user.matchPassword(password))) {
     res.status(400);
     throw new Error("Username or password is incorrect.");
   }

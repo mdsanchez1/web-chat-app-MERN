@@ -19,11 +19,11 @@ const Login = () => {
 
   return (
     <VStack spacing="5px">
-      <FormControl isRequired id="username">
+      <FormControl isRequired id="usernameL">
         <FormLabel>Username</FormLabel>
         <Input placeholder="user" onChange={(e) => setUser(e.target.value)} />
       </FormControl>
-      <FormControl isRequired id="password">
+      <FormControl isRequired id="passwordL">
         <FormLabel>Password</FormLabel>
         <InputGroup>
           <Input
