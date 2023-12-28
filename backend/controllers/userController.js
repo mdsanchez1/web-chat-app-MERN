@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 const generateToken = require("../config/generateToken");
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, username, password, pic } = req.body;
+  const { name, username, password, picture } = req.body;
 
   if (!name || !username || !password) {
     res.status(400);
@@ -74,7 +74,7 @@ const getUsers = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const users = await User.find(user); //.find({ _id: { $ne: req.user._id } });
+  const users = await User.find(user).find({ _id: { $ne: req.user._id } });
 
   res.send(users);
 });

@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect } from "react";
 import { Container, Box, Text } from "@chakra-ui/react";
 import {
   Tabs,
@@ -7,11 +7,25 @@ import {
   Tab,
   TabPanel,
   Image,
+  TabIndicator,
 } from "@chakra-ui/react";
 import Login from "../components/Authentication/Login";
 import Register from "../components/Authentication/Register";
+import { useHistory } from "react-router-dom";
 
-const homepage = () => {
+const HomePage = () => {
+  const history = useHistory();
+
+  // if user is logged in, direct them to chatpage
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+    if (userInfo) {
+      history.push("/chats");
+    }
+  }, [history]);
+
+  // home page UI
   return (
     <Container maxW="550px" centerContent>
       <Box
@@ -31,11 +45,17 @@ const homepage = () => {
       </Box>
 
       <Box w="100%" p={4} borderRadius={"8px"} borderWidth={"2px"}>
-        <Tabs isFitted variant="soft-rounded">
+        <Tabs isFitted variant="unstyled">
           <TabList>
-            <Tab _selected={{ color: "white", bg: "blue.500" }}>Login</Tab>
-            <Tab _selected={{ color: "white", bg: "red.500" }}>Register</Tab>
+            <Tab _selected={{ fontWeight: "bold" }}>Login</Tab>
+            <Tab _selected={{ fontWeight: "bold" }}>Register</Tab>
           </TabList>
+          <TabIndicator
+            mt="-1.5px"
+            height="2px"
+            bg="blue.500"
+            borderRadius="1px"
+          />
           <TabPanels>
             <TabPanel>
               <Login />
@@ -50,4 +70,4 @@ const homepage = () => {
   );
 };
 
-export default homepage;
+export default HomePage;
